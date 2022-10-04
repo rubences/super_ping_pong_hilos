@@ -1,7 +1,5 @@
 public class Game {
 
-    public static final int MAX_TURNS = 10;
-
     public static void controlador(String[] args) {
 
         Player player1 = new Player("ping");
@@ -19,6 +17,18 @@ public class Game {
         Thread thread1 = new Thread(player1);
         thread1.start();
 
+        //Let the players play!
+        try {
+            Thread.sleep(2);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        //Tell the players to stop
+        thread1.interrupt();
+        thread2.interrupt();
+
+        //Wait until players finish
         try {
             thread1.join();
             thread2.join();
