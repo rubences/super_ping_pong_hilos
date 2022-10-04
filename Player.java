@@ -10,10 +10,16 @@ public class Player implements Runnable {
         this.text = text;
     }
 
-    @Override
+@Override
     public void run() {
         while(!Thread.interrupted()) {
             while (!mustPlay);
+
+            try {
+                Thread.sleep(1);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
 
             System.out.println(text);
 
