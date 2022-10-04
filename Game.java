@@ -2,7 +2,7 @@ public class Game {
 
     public static final int MAX_TURNS = 10;
 
-    public static void lanzador(String[] args) {
+    public static void controlador(String[] args) {
 
         Player player1 = new Player("ping");
         Player player2 = new Player("pong");
@@ -12,8 +12,14 @@ public class Game {
 
         System.out.println("Game starting...!");
 
-        player1.play();
+        player1.setMustPlay(true);
+
+        Thread thread2 = new Thread(player2);
+        thread2.start();
+        Thread thread1 = new Thread(player1);
+        thread1.start();
 
         System.out.println("Game finished!");
     }
+
 }

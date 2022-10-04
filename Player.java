@@ -1,4 +1,4 @@
-public class Player {
+public class Player implements Runnable {
 
     private final String text;
 
@@ -6,15 +6,23 @@ public class Player {
 
     private Player nextPlayer;
 
+    private boolean mustPlay = false;
+
     public Player(String text) {
         this.text = text;
     }
 
-    public void play() {
-        if (!gameFinished()) {
+    @Override
+    public void run() {
+        while(!gameFinished()) {
+            while (!mustPlay);
+
             System.out.println(text);
             turns--;
-            nextPlayer.play();
+
+            this.mustPlay = false;
+            nextPlayer.mustPlay = true;
+
         }
     }
 
@@ -26,4 +34,7 @@ public class Player {
         this.nextPlayer = nextPlayer;
     }
 
+    public void setMustPlay(boolean mustPlay) {
+        this.mustPlay = mustPlay;
+    }
 }
