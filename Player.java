@@ -11,23 +11,23 @@ public class Player implements Runnable {
     }
 
 @Override
-    public void run() {
-        while(!Thread.interrupted()) {
-            while (!mustPlay);
+public void run() {
+    while(!Thread.interrupted()) {
+        while (!mustPlay);
 
-            try {
-                Thread.sleep(1);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
-            System.out.println(text);
-
-            this.mustPlay = false;
-            nextPlayer.mustPlay = true;
-
+        try {
+            Thread.sleep(1);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
         }
+
+        System.out.println(text);
+
+        this.mustPlay = false;
+        nextPlayer.mustPlay = true;
+
     }
+}
 
     public void setNextPlayer(Player nextPlayer) {
         this.nextPlayer = nextPlayer;
