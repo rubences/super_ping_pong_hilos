@@ -1,8 +1,9 @@
+import java.util.concurrent.locks.*;
+
 public class Game {
 
     public static void controlador(String[] args) {
-
-        Object lock = new Object();
+        Lock lock = new ReentrantLock();
 
         Player player1 = new Player("ping", lock);
         Player player2 = new Player("pong", lock);
@@ -40,5 +41,4 @@ public class Game {
 
         System.out.println("Game finished!");
     }
-
 }

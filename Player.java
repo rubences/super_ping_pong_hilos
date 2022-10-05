@@ -1,43 +1,48 @@
+import java.util.concurrent.locks.*;
+
 public class Player implements Runnable {
 
     private final String text;
 
-    private final Object lock;
+    private final Lock lock;
+    private final Condition myTurn;
+    private Condition nextTurn;
 
     private Player nextPlayer;
 
     private volatile boolean play = false;
 
     public Player(String text,
-                  Object lock) {
+                  Lock lock) {
         this.text = text;
         this.lock = lock;
+        this.myTurn = lock.newCondition();
     }
 
     @Override
     public void run() {
         while(!Thread.interrupted()) {
-            synchronized (lock) {
-                try {
-                    while (!play)
-                        lock.wait();
+            lock.lock();
 
-                    System.out.println(text);
+            try {
+                while (!play)
+                    myTurn.awaitUninterruptibly();
 
-                    this.play = false;
-                    nextPlayer.play = true;
+                System.out.println(text);
 
-                    lock.notifyAll();
+                this.play = false;
+                nextPlayer.play = true;
 
-                } catch (InterruptedException e) {
-                    Thread.currentThread().interrupt();
-                }
+                nextTurn.signal();
+            } finally {
+                lock.unlock();
             }
         }
     }
 
     public void setNextPlayer(Player nextPlayer) {
         this.nextPlayer = nextPlayer;
+        this.nextTurn = nextPlayer.myTurn;
     }
 
     public void setPlay(boolean play) {
