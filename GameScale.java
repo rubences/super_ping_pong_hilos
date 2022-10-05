@@ -5,7 +5,7 @@ public class GameScale {
 
     private static int NUM_PLAYERS;
 
-    public static int dameJuagadores(){
+    public static int dameJugadores(){
             Scanner sc = new Scanner(System.in);
 
         // Entrada de datos numéricos
@@ -24,7 +24,7 @@ public class GameScale {
     public static void controlador(String[] args) {
         Lock lock = new ReentrantLock();
 
-        int length = dameJuagadores();
+        int length = dameJugadores();
 
         Player[] players = new Player[length];
 

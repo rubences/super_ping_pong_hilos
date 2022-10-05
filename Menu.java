@@ -9,7 +9,7 @@ public class Menu {
         boolean salir = false;
         int opcion; //Guardaremos la opcion del usuario
  
-        while (!salir) {
+        do {
  
             System.out.println("1. Opcion de Dos Jugadores");
             System.out.println("2. Opcion de N jugadores");
@@ -31,15 +31,16 @@ public class Menu {
                         break;
                     case 3:
                         salir = true;
+                        System.out.println("Gracias por utilizar nuestro código");
                         break;
                     default:
                         System.out.println("Solo números entre 1 y 3");
                 }
-            } catch (InputMismatchException e) {
+            } catch (Exception e) {
                 System.out.println("Debes insertar un número");
-                sn.next();
             }
-        }
+          sn.close();
+        }while(sn.nextInt()!=3);
  
     }
  
