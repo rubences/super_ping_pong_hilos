@@ -1,13 +1,30 @@
 import java.util.concurrent.locks.*;
+import java.util.Scanner;
 
 public class GameScale {
 
-    public static final int NUM_PLAYERS = 6;
+    private static int NUM_PLAYERS;
+
+    public static int dameJuagadores(){
+            Scanner sc = new Scanner(System.in);
+
+        // Entrada de datos numéricos
+        // byte, short y float
+      try{  
+        System.out.println("Introduce el numero de jugadores:");
+        NUM_PLAYERS = sc.nextInt();
+      }catch(Exception e){
+         System.out.println("No es un valor válido");
+      }
+      sc.close();
+      return NUM_PLAYERS; 
+    }
+    
 
     public static void controlador(String[] args) {
         Lock lock = new ReentrantLock();
 
-        int length = NUM_PLAYERS;
+        int length = dameJuagadores();
 
         Player[] players = new Player[length];
 
