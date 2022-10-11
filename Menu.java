@@ -32,7 +32,7 @@ public class Menu {
                         break;
                     case 3:
                         System.out.println("Has seleccionado la opcion 3");
-                    GameExetutor.controlador(args);
+                    GameExectutor.controlador(args);
                         break;
                     case 4:
                         salir = true;
