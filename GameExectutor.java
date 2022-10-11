@@ -1,4 +1,15 @@
-public class GameExetutor {
+import java.util.concurrent.locks.*;
+import java.util.Scanner;
+import java.time.Duration;
+import java.time.Instant;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
+
+public class GameExectutor {
 
     public static void controlador(String[] args) {
         Lock lock = new ReentrantLock();
