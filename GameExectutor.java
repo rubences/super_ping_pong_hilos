@@ -16,24 +16,27 @@ public class GameExectutor {
 
         Player player1 = new Player("ping", lock);
         Player player2 = new Player("pong", lock);
+        player1.setNextPlayer(player2);
+        player2.setNextPlayer(player1);
+
         System.out.println("Game starting...!");
 ExecutorService executor = Executors.newFixedThreadPool(2);
-    
-    executor.execute(player1);
-    executor.execute(player2);
-    
-    sleep(2);
-    
-    executor.shutdownNow();
-    
-    try {
-        executor.awaitTermination(5, TimeUnit.SECONDS);
-    } catch (InterruptedException e) {
-        System.out.println("Main thread interrupted while waiting for players to finish");
-    }
+
+executor.execute(player1);
+executor.execute(player2);
+
+sleep(2);
+
+executor.shutdownNow();
+
+try {
+    executor.awaitTermination(5, TimeUnit.SECONDS);
+} catch (InterruptedException e) {
+    System.out.println("Main thread interrupted while waiting for players to finish");
+}
 
 System.out.println("Game finished!");
-    }
+}
     public static void sleep(long ms) {
         try {
             Thread.sleep(ms);
