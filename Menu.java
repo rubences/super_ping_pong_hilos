@@ -13,6 +13,7 @@ public class Menu {
  
             System.out.println("1. Opcion de Dos Jugadores");
             System.out.println("2. Opcion de N jugadores");
+            System.out.println("3. Opcion de 2 jugadores con executors");
             System.out.println("3. Salir");
  
             try {
@@ -30,6 +31,10 @@ public class Menu {
                     GameScale.controlador(args);
                         break;
                     case 3:
+                        System.out.println("Has seleccionado la opcion 3");
+                    GameExetutor.controlador(args);
+                        break;
+                    case 4:
                         salir = true;
                         System.out.println("Gracias por utilizar nuestro código");
                         break;
